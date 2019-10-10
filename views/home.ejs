@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="/style.css" >
+    <title>About</title>
+</head>
+<body>
+        <% include partials/nav  %>
+    <h1>this is home page</h1>
+    <h1>
+
+            <%= data1[0]%>
+            <br />
+            <%= data1[1] %>
+            <br/>
+            <%= data1[2] %>
+            <hr/>
+             <%= id.id %>
+    </h1>
+    <h1>
+        <form>
+            <input type="text" name="form">
+            <button>Add</button>
+        </form>
+    </h1>
+   
+    <script>
+        document.getElementById("myForm").onsubmit =(e)=>{
+          e.preventDefault();
+            const url = "http://localhost:5050/sent-data";
+            var data = new URLSearchParams();
+             console.log(e.target)
+             for(const pair of new FormData(e.target)){
+                // console.log(pair)
+               data.append(pair[0],pair[1])
+             }
+            fetch(url,{
+                method:"post",
+                body:data,
+               
+            }).then(res=>res.json())
+            .then(res2 => console.log(res2)); 
+        }
+       
+        
+        </script>
+</body>
+    
+
+</html>
